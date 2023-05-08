@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  traefik:
+    image: traefik:latest
+    command: --docker --docker.domain=151-plus.com
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - web_zone
+    volumes:
+      - /run/docker.sock:/run/docker.sock
+      - ./traefik.yml:/traefik.yml
+      - ./route.yml:/route.yml
+      - ./acme.json:/acme.json
+    container_name: traefik-dev
+    restart: always
+networks:
+  web_zone:
+      external: true

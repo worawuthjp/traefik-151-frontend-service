@@ -1,0 +1,18 @@
+# Static configuration
+entryPoints:
+  unsecure:
+    address: :80
+  secure:
+    address: :443
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: admin@domain.com
+      storage: acme.json
+      httpChallenge:
+        entryPoint: unsecure      
+providers:
+  file:
+    directory: ./routes
+    watch: true
